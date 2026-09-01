@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stackset — Infrastructure that ships itself</title>
+  <meta name="description" content="Stackset turns your cloud into declarative, versioned stacks. Preview every change, catch drift instantly, and roll back in seconds." />
+  <meta property="og:title" content="Stackset — Infrastructure that ships itself" />
+  <meta property="og:description" content="Declarative, versioned cloud stacks with preview environments, drift detection, and instant rollbacks." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://stackset.io/" />
+  <meta property="og:image" content="https://stackset.io/assets/og.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preload" href="assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="min-h-screen">
+
+  <!-- ================= NAV ================= -->
+  <header id="site-nav" class="fixed inset-x-0 top-0 z-50">
+    <div class="container-site flex h-16 items-center justify-between">
+      <a href="#top" class="flex items-center gap-2.5" aria-label="Stackset home">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="lg-nav" x1="0" y1="0" x2="32" y2="32">
+              <stop stop-color="#22d3ee"/><stop offset=".5" stop-color="#818cf8"/><stop offset="1" stop-color="#e879f9"/>
+            </linearGradient>
+          </defs>
+          <path d="M16 3 29 9.5 16 16 3 9.5 16 3Z" fill="url(#lg-nav)"/>
+          <path d="M3 15.5 16 22l13-6.5" stroke="url(#lg-nav)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".75"/>
+          <path d="M3 21.5 16 28l13-6.5" stroke="url(#lg-nav)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".4"/>
+        </svg>
+        <span class="font-display text-lg font-bold tracking-tight text-bright">stackset</span>
+      </a>
+
+      <nav class="hidden items-center gap-8 text-sm font-medium md:flex" aria-label="Primary">
+        <a href="#features" class="text-body transition-colors hover:text-bright">Features</a>
+        <a href="#how" class="text-body transition-colors hover:text-bright">How it works</a>
+        <a href="#stats" class="text-body transition-colors hover:text-bright">Why Stackset</a>
+        <a href="#contact" class="text-body transition-colors hover:text-bright">Contact</a>
+      </nav>
+
+      <div class="hidden items-center gap-3 md:flex">
+        <a href="#" class="rounded-lg px-4 py-2 text-sm font-semibold text-bright transition-colors hover:text-cyan">Sign in</a>
+        <a href="#contact" class="btn-primary !px-4 !py-2 text-sm">Get started</a>
+      </div>
+
+      <button id="menu-btn" class="grid size-10 place-items-center rounded-lg border border-line text-bright md:hidden" aria-label="Toggle menu" aria-expanded="false">
+        <svg id="icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg id="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="hidden"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="glass mx-4 mt-1 hidden rounded-2xl p-4 md:hidden">
+      <nav class="flex flex-col gap-1 text-sm font-medium" aria-label="Mobile">
+        <a href="#features" class="rounded-lg px-3 py-2.5 text-body hover:bg-white/5 hover:text-bright">Features</a>
+        <a href="#how" class="rounded-lg px-3 py-2.5 text-body hover:bg-white/5 hover:text-bright">How it works</a>
+        <a href="#stats" class="rounded-lg px-3 py-2.5 text-body hover:bg-white/5 hover:text-bright">Why Stackset</a>
+        <a href="#contact" class="rounded-lg px-3 py-2.5 text-body hover:bg-white/5 hover:text-bright">Contact</a>
+        <a href="#contact" class="btn-primary mt-2 justify-center text-sm">Get started</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ================= HERO ================= -->
+    <section class="relative overflow-hidden pt-36 pb-24 sm:pt-44 sm:pb-32">
+      <div class="bg-grid absolute inset-0" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div data-orb="1" class="animate-drift-slow absolute -top-32 left-[8%] h-[26rem] w-[26rem] rounded-full bg-violet/25 blur-[120px]"></div>
+        <div data-orb="2" class="animate-drift-slower absolute top-24 right-[4%] h-[22rem] w-[22rem] rounded-full bg-cyan/20 blur-[110px]"></div>
+        <div data-orb="3" class="absolute -bottom-40 left-[35%] h-[24rem] w-[24rem] rounded-full bg-magenta/15 blur-[130px]"></div>
+      </div>
+
+      <div class="container-site relative">
+        <div class="mx-auto max-w-3xl text-center">
+          <p data-hero="eyebrow" class="font-mono inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.03] px-4 py-1.5 text-xs font-medium tracking-widest text-cyan">
+            <span class="inline-block size-1.5 rounded-full bg-cyan shadow-[0_0_12px_#22d3ee]"></span>
+            STACKSET PLATFORM
+          </p>
+
+          <h1 id="hero-title" class="font-display mt-6 text-4xl font-bold leading-[1.06] tracking-tight text-bright sm:text-6xl lg:text-7xl">
+            Infrastructure that <span class="text-gradient">ships itself.</span>
+          </h1>
+
+          <p data-hero="sub" class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-body sm:text-xl">
+            Stackset turns your cloud into declarative, versioned stacks — preview every change in a live environment, catch drift the moment it happens, and roll back in seconds.
+          </p>
+
+          <div data-hero="cta" class="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <a href="#contact" class="btn-primary">
+              Start deploying
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="#how" class="btn-ghost">See how it works</a>
+          </div>
+        </div>
+
+        <!-- terminal card -->
+        <div data-hero="terminal" class="glass mx-auto mt-16 w-full max-w-2xl rounded-2xl shadow-[0_30px_100px_-30px_rgba(99,102,241,0.45)]">
+          <div class="flex items-center gap-2 border-b border-line px-5 py-3.5">
+            <span class="size-3 rounded-full bg-[#ff5f57]"></span>
+            <span class="size-3 rounded-full bg-[#febc2e]"></span>
+            <span class="size-3 rounded-full bg-[#28c840]"></span>
+            <span class="font-mono ml-3 text-xs text-body/70">deploy — stackset</span>
+          </div>
+          <div id="terminal-body" class="font-mono min-h-[10.5rem] space-y-2.5 px-5 py-5 text-[13px] leading-relaxed sm:text-sm" aria-label="Example deploy session">
+            <p data-line class="text-bright"><span class="text-cyan">$</span> stackset deploy --env production</p>
+            <p data-line class="text-body"><span class="text-violet">◇</span> Plan resolved — <span class="text-bright">42 resources</span>, 0 conflicts</p>
+            <p data-line class="text-body"><span class="text-cyan">✔</span> Preview environment live at <span class="underline decoration-line underline-offset-4">pr-241.stackset.dev</span></p>
+            <p data-line class="text-body"><span class="text-cyan">✔</span> Policy checks passed · cost delta <span class="text-bright">+$3.12/mo</span></p>
+            <p data-line class="text-bright"><span class="text-magenta">▲</span> Deployed to production in <span class="text-gradient font-semibold">38s</span> — zero drift <span class="caret"></span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LOGOS ================= -->
+    <section class="border-y border-line/60 bg-ink-2/60 py-10">
+      <div class="container-site">
+        <p class="font-mono text-center text-xs tracking-[0.2em] text-body/60">POWERING THE STACKS AT</p>
+        <div data-reveal class="mt-6 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-lg font-semibold tracking-tight text-body/45">
+          <span class="font-display">Nimbusly</span>
+          <span class="font-display">Corelayer</span>
+          <span class="font-display">VectorDyne</span>
+          <span class="font-display">Quantabyte</span>
+          <span class="font-display">Ferrous&nbsp;Labs</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+    <section id="features" class="relative py-24 sm:py-32">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center" data-reveal>
+          <p class="font-mono text-xs tracking-[0.25em] text-cyan">CAPABILITIES</p>
+          <h2 class="font-display mt-4 text-3xl font-bold tracking-tight text-bright sm:text-5xl">Everything between <span class="text-gradient">commit and cloud</span></h2>
+          <p class="mt-5 text-lg text-body">One platform for the whole lifecycle of your infrastructure — no glue scripts, no tribal knowledge, no 2 a.m. surprises.</p>
+        </div>
+
+        <div class="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- card -->
+          <article data-card class="glass card-glow rounded-2xl p-7">
+            <div class="grid size-11 place-items-center rounded-xl bg-gradient-to-br from-cyan/20 to-violet/20 ring-1 ring-line">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 21 7.5 12 12 3 7.5 12 3Z"/><path d="M3 12l9 4.5 9-4.5M3 16.5 12 21l9-4.5"/></svg>
+            </div>
+            <h3 class="font-display mt-5 text-lg font-semibold text-bright">Declarative stacks</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed">Describe your entire environment in a single versioned file. Stackset reconciles reality to match — continuously.</p>
+          </article>
+
+          <article data-card class="glass card-glow rounded-2xl p-7">
+            <div class="grid size-11 place-items-center rounded-xl bg-gradient-to-br from-cyan/20 to-violet/20 ring-1 ring-line">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3M7 9h4M7 12.5h7"/></svg>
+            </div>
+            <h3 class="font-display mt-5 text-lg font-semibold text-bright">Preview environments</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed">Every pull request gets a production-grade clone with its own URL. Review changes running, not imagined.</p>
+          </article>
+
+          <article data-card class="glass card-glow rounded-2xl p-7">
+            <div class="grid size-11 place-items-center rounded-xl bg-gradient-to-br from-cyan/20 to-violet/20 ring-1 ring-line">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e879f9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.2 2.2M16.2 16.2l2.2 2.2M18.4 5.6l-2.2 2.2M7.8 16.2l-2.2 2.2"/><circle cx="12" cy="12" r="3.2"/></svg>
+            </div>
+            <h3 class="font-display mt-5 text-lg font-semibold text-bright">Drift detection</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed">Out-of-band change? Stackset flags it within seconds, shows the diff, and offers a one-click reconcile.</p>
+          </article>
+
+          <article data-card class="glass card-glow rounded-2xl p-7">
+            <div class="grid size-11 place-items-center rounded-xl bg-gradient-to-br from-cyan/20 to-violet/20 ring-1 ring-line">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-8"/><path d="M14 8h6v6"/></svg>
+            </div>
+            <h3 class="font-display mt-5 text-lg font-semibold text-bright">Cost telemetry</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed">See the dollar impact of every change before you merge it. Budgets, forecasts, and per-stack breakdowns built in.</p>
+          </article>
+
+          <article data-card class="glass card-glow rounded-2xl p-7">
+            <div class="grid size-11 place-items-center rounded-xl bg-gradient-to-br from-cyan/20 to-violet/20 ring-1 ring-line">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14.5v2"/></svg>
+            </div>
+            <h3 class="font-display mt-5 text-lg font-semibold text-bright">Zero-trust secrets</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed">Short-lived credentials minted at deploy time and injected at runtime. Nothing sensitive ever sits at rest.</p>
+          </article>
+
+          <article data-card class="glass card-glow rounded-2xl p-7">
+            <div class="grid size-11 place-items-center rounded-xl bg-gradient-to-br from-cyan/20 to-violet/20 ring-1 ring-line">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e879f9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a8 8 0 1 1 2.3 5.7"/><path d="M4 15v-5h5"/></svg>
+            </div>
+            <h3 class="font-display mt-5 text-lg font-semibold text-bright">Instant rollbacks</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed">Every deploy is an immutable snapshot. Restore any environment to any point in time in under a minute.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section id="how" class="relative border-t border-line/60 bg-ink-2/40 py-24 sm:py-32">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center" data-reveal>
+          <p class="font-mono text-xs tracking-[0.25em] text-violet">WORKFLOW</p>
+          <h2 class="font-display mt-4 text-3xl font-bold tracking-tight text-bright sm:text-5xl">Three steps to <span class="text-gradient">boring deploys</span></h2>
+          <p class="mt-5 text-lg text-body">Boring is the goal. Here's the whole loop.</p>
+        </div>
+
+        <div class="relative mt-16 grid gap-5 lg:grid-cols-3">
+          <div class="step-line absolute top-24 right-[8%] left-[8%] hidden h-px lg:block" aria-hidden="true"></div>
+
+          <article data-card class="glass card-glow relative rounded-2xl p-7">
+            <span class="font-mono text-xs tracking-[0.25em] text-cyan">01 · DEFINE</span>
+            <h3 class="font-display mt-3 text-lg font-semibold text-bright">Write your stack once</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed">A single <span class="font-mono text-bright">stack.yaml</span> describes services, data, and policies.</p>
+            <pre class="font-mono mt-5 overflow-x-auto rounded-xl border border-line bg-ink/80 p-4 text-xs leading-relaxed text-body"><code><span class="text-violet">stack</span>: api-core
+<span class="text-violet">region</span>: us-east-1
+<span class="text-violet">services</span>:
+  - <span class="text-cyan">web</span>: { replicas: 3 }
+  - <span class="text-cyan">worker</span>: { queue: jobs }
+<span class="text-violet">policy</span>: zero-drift</code></pre>
+          </article>
+
+          <article data-card class="glass card-glow relative rounded-2xl p-7">
+            <span class="font-mono text-xs tracking-[0.25em] text-violet">02 · PREVIEW</span>
+            <h3 class="font-display mt-3 text-lg font-semibold text-bright">Review it running</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed">Open a PR and get a live, isolated clone of production with the change applied.</p>
+            <div class="font-mono mt-5 space-y-2.5 rounded-xl border border-line bg-ink/80 p-4 text-xs leading-relaxed">
+              <p class="text-body"><span class="text-cyan">✔</span> pr-241 environment ready · 38s</p>
+              <p class="text-body"><span class="text-cyan">✔</span> integration suite — 148 passed</p>
+              <p class="text-body"><span class="text-cyan">✔</span> cost delta +$3.12/mo</p>
+              <p class="text-bright"><span class="text-violet">◆</span> approved by 2 reviewers</p>
+            </div>
+          </article>
+
+          <article data-card class="glass card-glow relative rounded-2xl p-7">
+            <span class="font-mono text-xs tracking-[0.25em] text-magenta">03 · SHIP</span>
+            <h3 class="font-display mt-3 text-lg font-semibold text-bright">Merge and forget</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed">Progressive rollout with automatic health gates — and a rollback snapshot on every deploy.</p>
+            <div class="font-mono mt-5 space-y-2.5 rounded-xl border border-line bg-ink/80 p-4 text-xs leading-relaxed">
+              <p class="text-body"><span class="text-magenta">▲</span> canary 10% → 50% → 100%</p>
+              <p class="text-body"><span class="text-cyan">✔</span> p99 latency stable · 41ms</p>
+              <p class="text-body"><span class="text-cyan">✔</span> error budget untouched</p>
+              <p class="text-bright"><span class="text-cyan">●</span> snapshot #1042 saved</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATS ================= -->
+    <section id="stats" class="relative overflow-hidden py-24 sm:py-28">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div class="absolute top-1/2 left-1/2 h-[30rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet/10 blur-[140px]"></div>
+      </div>
+      <div class="container-site relative">
+        <div class="grid gap-10 text-center sm:grid-cols-2 lg:grid-cols-4">
+          <div data-reveal>
+            <p class="font-display text-4xl font-bold tracking-tight text-bright sm:text-5xl"><span data-count="99.99" data-decimals="2">99.99</span>%</p>
+            <p class="font-mono mt-2 text-xs tracking-[0.2em] text-body/70">PLATFORM UPTIME</p>
+          </div>
+          <div data-reveal>
+            <p class="font-display text-4xl font-bold tracking-tight text-bright sm:text-5xl"><span data-count="120">120</span>k+</p>
+            <p class="font-mono mt-2 text-xs tracking-[0.2em] text-body/70">STACKS DEPLOYED</p>
+          </div>
+          <div data-reveal>
+            <p class="font-display text-4xl font-bold tracking-tight text-bright sm:text-5xl"><span data-count="4.8" data-decimals="1">4.8</span>×</p>
+            <p class="font-mono mt-2 text-xs tracking-[0.2em] text-body/70">FASTER SHIPPING</p>
+          </div>
+          <div data-reveal>
+            <p class="font-display text-4xl font-bold tracking-tight text-bright sm:text-5xl">&lt;<span data-count="60">60</span>s</p>
+            <p class="font-mono mt-2 text-xs tracking-[0.2em] text-body/70">TO ROLL BACK</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section id="contact" class="pb-28">
+      <div class="container-site">
+        <div data-reveal class="relative overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-surface via-ink-2 to-surface p-10 text-center sm:p-16">
+          <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+            <div class="absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-violet/20 blur-[100px]"></div>
+          </div>
+          <div class="relative">
+            <h2 class="font-display mx-auto max-w-2xl text-3xl font-bold tracking-tight text-bright sm:text-5xl">Ready to make deploys <span class="text-gradient">boring?</span></h2>
+            <p class="mx-auto mt-5 max-w-xl text-lg text-body">Spin up your first stack in minutes. Free while we're in beta — no credit card, no sales call.</p>
+            <div class="mt-9 flex flex-wrap items-center justify-center gap-4">
+              <a href="mailto:brian.ren@stackset.io" class="btn-primary">Request access</a>
+              <a href="mailto:brian.ren@stackset.io" class="btn-ghost">brian.ren@stackset.io</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t border-line/60 bg-ink-2/60">
+    <div class="container-site py-14">
+      <div class="flex flex-col justify-between gap-10 md:flex-row">
+        <div class="max-w-xs">
+          <a href="#top" class="flex items-center gap-2.5">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="lg-foot" x1="0" y1="0" x2="32" y2="32">
+                  <stop stop-color="#22d3ee"/><stop offset=".5" stop-color="#818cf8"/><stop offset="1" stop-color="#e879f9"/>
+                </linearGradient>
+              </defs>
+              <path d="M16 3 29 9.5 16 16 3 9.5 16 3Z" fill="url(#lg-foot)"/>
+              <path d="M3 15.5 16 22l13-6.5" stroke="url(#lg-foot)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".75"/>
+              <path d="M3 21.5 16 28l13-6.5" stroke="url(#lg-foot)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".4"/>
+            </svg>
+            <span class="font-display text-base font-bold tracking-tight text-bright">stackset</span>
+          </a>
+          <p class="mt-4 text-sm leading-relaxed text-body/80">Declarative, versioned cloud stacks with previews, drift detection, and instant rollbacks.</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-10 sm:grid-cols-3">
+          <div>
+            <p class="font-mono text-xs tracking-[0.2em] text-body/60">PRODUCT</p>
+            <ul class="mt-4 space-y-2.5 text-sm">
+              <li><a href="#features" class="text-body transition-colors hover:text-bright">Features</a></li>
+              <li><a href="#how" class="text-body transition-colors hover:text-bright">How it works</a></li>
+              <li><a href="#" class="text-body transition-colors hover:text-bright">Pricing</a></li>
+              <li><a href="#" class="text-body transition-colors hover:text-bright">Changelog</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-mono text-xs tracking-[0.2em] text-body/60">COMPANY</p>
+            <ul class="mt-4 space-y-2.5 text-sm">
+              <li><a href="#" class="text-body transition-colors hover:text-bright">About</a></li>
+              <li><a href="#" class="text-body transition-colors hover:text-bright">Careers</a></li>
+              <li><a href="mailto:brian.ren@stackset.io" class="text-body transition-colors hover:text-bright">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-mono text-xs tracking-[0.2em] text-body/60">LEGAL</p>
+            <ul class="mt-4 space-y-2.5 text-sm">
+              <li><a href="#" class="text-body transition-colors hover:text-bright">Privacy</a></li>
+              <li><a href="#" class="text-body transition-colors hover:text-bright">Terms</a></li>
+              <li><a href="#" class="text-body transition-colors hover:text-bright">Security</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-line/60 pt-8 sm:flex-row">
+        <p class="text-sm text-body/60">© 2026 Stackset Technologies Inc. · Markham, ON</p>
+        <p class="font-mono text-xs text-body/50">status: <span class="text-cyan">all systems nominal</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- animation stack (self-hosted): GSAP 3.15 + ScrollTrigger, Lenis 1.3 smooth scroll, SplitType -->
+  <script defer src="assets/vendor/gsap.min.js"></script>
+  <script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="assets/vendor/lenis.min.js"></script>
+  <script defer src="assets/vendor/split-type.min.js"></script>
+  <script defer src="assets/js/main.js"></script>
+</body>
+</html>
