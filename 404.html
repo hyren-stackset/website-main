@@ -3,23 +3,105 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>404 — Stackset</title>
+  <title>Page not found — Stackset Technologies</title>
+  <meta name="description" content="That page doesn't exist on stackset.io." />
+  <link rel="canonical" href="https://stackset.io/404.html" />
+  <meta name="theme-color" content="#05060c" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Stackset Technologies" />
+  <meta property="og:title" content="Page not found — Stackset Technologies" />
+  <meta property="og:description" content="That page doesn't exist on stackset.io." />
+  <meta property="og:url" content="https://stackset.io/404.html" />
+  <meta property="og:image" content="https://stackset.io/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Page not found — Stackset Technologies" />
+  <meta name="twitter:description" content="That page doesn't exist on stackset.io." />
+  <meta name="twitter:image" content="https://stackset.io/assets/og.png" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preload" href="/assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/assets/css/main.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Stackset Technologies Inc.","url":"https://stackset.io","logo":"https://stackset.io/assets/og.png","foundingLocation":"Markham, Ontario, Canada","founders":[{"@type":"Person","name":"Kevin Chan"},{"@type":"Person","name":"Brian Ren"}],"sameAs":["https://shelfie-app.ca"],"contactPoint":{"@type":"ContactPoint","email":"support@stackset.io","contactType":"customer support"}}</script>
 </head>
-<body class="min-h-screen">
-  <main class="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
-    <div class="bg-grid absolute inset-0" aria-hidden="true"></div>
-    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-      <div class="animate-drift-slow absolute -top-24 left-[15%] h-96 w-96 rounded-full bg-violet/20 blur-[120px]"></div>
-      <div class="animate-drift-slower absolute right-[10%] bottom-0 h-80 w-80 rounded-full bg-cyan/15 blur-[110px]"></div>
+<body>
+<div class="curtain" aria-hidden="true"><div class="cur-brand"><span class="mark" style="width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#22d3ee,#818cf8 55%,#e879f9);display:grid;place-items:center;color:#05060c;font-weight:800;font-size:.95rem">S</span>stackset</div></div>
+<div class="progress" aria-hidden="true"></div>
+<a class="sr-only" href="#main">Skip to content</a>
+
+<header id="site-nav" class="nav">
+  <div class="container">
+    <a class="brand" href="/" aria-label="Stackset home"><span class="mark">S</span>stackset</a>
+    <nav class="nav-links" aria-label="Primary"><a href="/">Home</a><a href="/products/">Products</a><a href="/security/">Security</a><a href="/about/">About</a><a href="/support/">Support</a></nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="https://shelfie-app.ca" target="_blank" rel="noopener">Shelfie app</a>
+      <a class="btn btn-primary" href="/support/#contact">Talk to us <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
-    <div class="glass relative max-w-md rounded-3xl p-10 text-center">
-      <p class="font-mono text-xs tracking-[0.25em] text-cyan">ERROR 404</p>
-      <h1 class="font-display mt-4 text-4xl font-bold tracking-tight text-bright">Stack <span class="text-gradient">not found.</span></h1>
-      <p class="mt-4 text-body">This environment was torn down, drifted away, or never existed. Let's roll you back to safety.</p>
-      <a href="/" class="btn-primary mt-8">Back to stackset.io</a>
+    <button id="menu-btn" class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+<div id="mobile-menu" class="mobile-menu"><a href="/">Home</a><a href="/products/">Products</a><a href="/security/">Security</a><a href="/about/">About</a><a href="/support/">Support</a><a class="btn btn-primary" href="/support/#contact">Talk to us</a></div>
+<main id="main">
+<section class="notfound hero">
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="orbs" aria-hidden="true"><span class="orb orb-1" data-orb></span><span class="orb orb-2" data-orb></span></div>
+  <div class="container hero-inner center">
+    <p class="eyebrow" data-hero="eyebrow">Error 404</p>
+    <h1 id="hero-title" class="h1" data-hero="title">Page <span class="gradient-text">not found.</span></h1>
+    <p class="lead mt-3" data-hero="sub" style="margin-inline:auto">This page was retired, moved, or never existed. Let's roll you back to safety.</p>
+    <div class="hero-cta" data-hero="cta" style="justify-content:center"><a class="btn btn-primary" href="/">Back to stackset.io</a><a class="btn btn-ghost" href="/support/">Support</a></div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/"><span class="mark">S</span>stackset</a>
+        <p class="tag">Stackset Technologies is a Canadian software company. We design, build and operate consumer apps and the secure infrastructure behind them.</p>
+        <p class="tag mono" style="font-size:.78rem;color:var(--muted)">Markham, Ontario · founded by Kevin Chan &amp; Brian Ren</p>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="https://shelfie-app.ca" target="_blank" rel="noopener">Shelfie</a></li>
+          <li><a href="/products/#clipforge">Clipforge</a></li>
+          <li><a href="/products/#relayform">Relayform</a></li>
+          <li><a href="/products/#pantryloop">Pantryloop</a></li>
+          <li><a href="/products/">All products</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/security/">Security</a></li>
+          <li><a href="/support/">Support</a></li>
+          <li><a href="/support/#contact">Contact</a></li>
+          <li><a href="/support/#investors">Investors</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/terms/">Terms of service</a></li>
+          <li><a href="/security/#disclosure">Responsible disclosure</a></li>
+          <li><a href="/.well-known/security.txt">security.txt</a></li>
+        </ul>
+      </div>
     </div>
-  </main>
+    <div class="footer-bottom">
+      <span>© 2026 Stackset Technologies Inc. · Markham, ON, Canada</span>
+      <span class="status-row"><span class="dot"></span>all systems nominal</span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/gsap.min.js" defer></script>
+<script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="/assets/vendor/lenis.min.js" defer></script>
+<script src="/assets/vendor/split-type.min.js" defer></script>
+<script src="/assets/js/main.js" defer></script>
 </body>
 </html>

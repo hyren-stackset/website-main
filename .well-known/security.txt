@@ -1,0 +1,5 @@
+Contact: mailto:security@stackset.io
+Expires: 2027-10-30T00:00:00.000Z
+Preferred-Languages: en, fr
+Canonical: https://stackset.io/.well-known/security.txt
+Policy: https://stackset.io/security/#disclosure

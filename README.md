@@ -1,5 +1,7 @@
 # stackset.io
 
-Marketing site for Stackset Technologies. Static — Tailwind CSS v4, GSAP + ScrollTrigger + Lenis + SplitType, self-hosted fonts.
+Company website for Stackset Technologies Inc. Static HTML + CSS with GSAP / ScrollTrigger / Lenis / SplitType (vendored) and self-hosted fonts. No build step.
 
-See **DEPLOY.md** for GitHub Pages + DNS setup.
+Pages: home · products · security · about · support · privacy · terms · 404. Plus `robots.txt`, `sitemap.xml`, `.well-known/security.txt`.
+
+See **DEPLOY.md** for GitHub Pages + DNS.

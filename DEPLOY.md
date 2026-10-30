@@ -1,86 +1,58 @@
-# Deploying stackset.io to GitHub Pages
+# Deploying stackset.io (GitHub Pages)
 
-The site is 100% static and self-contained (fonts + animation libraries are vendored — no CDNs, no build step needed to deploy). Total hosting cost: $0.
+Repo: `hyren-stackset/website-main` → GitHub Pages → `stackset.io`.
+The site is 100% static: hand-written CSS, vendored GSAP / ScrollTrigger / Lenis / SplitType, self-hosted fonts. **No build step, no npm.**
 
-## 1 · Push to GitHub
+## Publish this version
 
-1. Create a new repository on github.com (e.g. `stackset/website` or `<your-username>/stackset.io`). Public repos get free Pages; private repos need a paid plan for Pages.
-2. From this folder:
+From the folder containing this file:
 
 ```bash
-git init
+git init                                   # skip if this is already the clone
+git remote add origin git@github.com:hyren-stackset/website-main.git   # skip if present
 git add -A
-git commit -m "Stackset marketing site"
+git commit -m "Rebuild stackset.io as the company site (Shelfie + products, security, about, support, legal)"
 git branch -M main
-git remote add origin git@github.com:<YOUR_USER_OR_ORG>/<REPO>.git
-git push -u origin main
+git push -u origin main --force-with-lease  # this is a full replacement of the old single-page site
 ```
 
-## 2 · Turn on GitHub Pages
+Pages redeploys in about a minute. Settings → Pages should already say: Source "Deploy from a branch", branch `main`, folder `/ (root)`, custom domain `stackset.io`, Enforce HTTPS on. The `CNAME` file keeps the custom domain across pushes.
 
-Repo → **Settings → Pages**:
-
-- **Source**: "Deploy from a branch"
-- **Branch**: `main`, folder `/ (root)` → Save
-
-The `CNAME` file in this repo already tells Pages the site belongs to `stackset.io`, so the Custom domain box should fill itself in (if not, type `stackset.io` and Save).
-
-Optional but recommended: **Settings → Pages → Verify domain** — add the `_github-pages-challenge-...` TXT record it gives you at Porkbun. This stops anyone else from claiming stackset.io on Pages.
-
-## 3 · Point DNS at GitHub (at Porkbun)
-
-In Porkbun's DNS editor for stackset.io:
-
-**Remove** the two parking records (they conflict):
-- `ALIAS  stackset.io → pixie.porkbun.com`
-- `CNAME  *.stackset.io → pixie.porkbun.com`
-
-**Add** (apex → GitHub's Pages servers):
+## DNS (already correct at Porkbun, verified 2026-10-30)
 
 | Type | Host | Answer |
-|------|------|--------|
-| A | *(blank)* | 185.199.108.153 |
-| A | *(blank)* | 185.199.109.153 |
-| A | *(blank)* | 185.199.110.153 |
-| A | *(blank)* | 185.199.111.153 |
-| CNAME | www | `<YOUR_USER_OR_ORG>.github.io` |
+|---|---|---|
+| A | `@` | 185.199.108.153 / .109.153 / .110.153 / .111.153 |
+| CNAME | `www` | `hyren-stackset.github.io` |
 
-⚠️ **Leave every other record alone** — the MX, SPF (`v=spf1...`), DKIM (`x._domainkey`), and `_da-verify` TXT records are your MXroute email; they are independent of web hosting and must stay.
-
-## 4 · HTTPS
-
-Back in **Settings → Pages**, wait for the DNS check to go green (minutes to ~1 hour), then tick **Enforce HTTPS**. GitHub issues a free Let's Encrypt certificate automatically.
-
-## Updating the site later
-
-Edit files → commit → `git push`. Pages redeploys automatically in ~1 minute.
-
-If you change any Tailwind classes in `index.html`, rebuild the CSS first:
-
-```bash
-npm install          # once
-npm run build:css    # regenerates assets/css/main.css
-```
+Leave the MX / SPF / DKIM / `_da-verify` records alone; they are MXroute email.
 
 ## What's in the box
 
 ```
-index.html            the whole site (single page)
-404.html              styled not-found page
-CNAME                 tells GitHub Pages the custom domain
-.nojekyll             disables Jekyll processing
-favicon.svg
-assets/css/main.css   compiled + minified Tailwind v4
-assets/js/main.js     animation logic (GSAP + ScrollTrigger + Lenis + SplitType)
-assets/vendor/        pinned, self-hosted animation libraries
-assets/fonts/         self-hosted variable fonts (Inter, Space Grotesk, JetBrains Mono)
-assets/og.png         social-share card
-src/input.css         Tailwind source (edit here, then rebuild)
+index.html                    home
+products/index.html           Shelfie + Clipforge, Relayform, Pantryloop
+security/index.html           security & infrastructure overview
+about/index.html              company, founders, timeline, values
+support/index.html            FAQ, contact form (mailto), investors
+privacy/index.html            privacy policy
+terms/index.html              terms of service
+404.html                      styled not-found page (GitHub Pages serves it automatically)
+robots.txt  sitemap.xml  humans.txt  .well-known/security.txt
+CNAME  .nojekyll  favicon.svg
+assets/css/main.css           all styles (edit directly)
+assets/js/main.js             motion + nav + forms
+assets/vendor/                pinned animation libraries
+assets/fonts/                 Inter, Space Grotesk, JetBrains Mono (variable, latin)
+assets/og.png                 social share card
 ```
 
-## The animation stack (for future tinkering)
+## Editing
 
-- **GSAP 3.15 + ScrollTrigger** — timelines, scroll-linked reveals, stat counters
-- **Lenis 1.3** — buttery smooth scrolling, driven off GSAP's ticker
-- **SplitType** — splits the hero headline into words for the staggered entrance
-- Everything is disabled automatically for users with `prefers-reduced-motion`.
+- Pages are plain HTML; header and footer are repeated in each file. If you change the nav or footer, change it in every page (search for `<header id="site-nav"` and `<footer class="footer"`).
+- Motion is driven by data attributes: `data-reveal`, `data-card`, `data-stagger`, `data-split`, `data-count`, `data-phone`. Add them to new elements and the animations apply automatically.
+- Everything respects `prefers-reduced-motion`.
+
+## Email addresses referenced
+
+`hello@`, `support@`, `privacy@`, `security@`, `partners@`, `legal@`, `founders@stackset.io`. Create these as mailboxes or aliases in MXroute (an alias to brian.ren@stackset.io is enough to start).

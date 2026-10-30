@@ -1,0 +1,6 @@
+/* TEAM */
+Founders: Kevin Chan, Brian Ren
+Location: Markham, Ontario, Canada
+
+/* SITE */
+Stack: static HTML + CSS, GSAP, ScrollTrigger, Lenis, SplitType. Self-hosted fonts. No trackers.

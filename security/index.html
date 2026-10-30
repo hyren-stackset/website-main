@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Security &amp; infrastructure — Stackset Technologies</title>
+  <meta name="description" content="How Stackset builds and operates software: integration service endpoints instead of exposed databases, SSO everywhere, containerised services, row-level security and responsible disclosure." />
+  <link rel="canonical" href="https://stackset.io/security/" />
+  <meta name="theme-color" content="#05060c" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Stackset Technologies" />
+  <meta property="og:title" content="Security &amp; infrastructure — Stackset Technologies" />
+  <meta property="og:description" content="How Stackset builds and operates software: integration service endpoints instead of exposed databases, SSO everywhere, containerised services, row-level security and responsible disclosure." />
+  <meta property="og:url" content="https://stackset.io/security/" />
+  <meta property="og:image" content="https://stackset.io/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Security &amp; infrastructure — Stackset Technologies" />
+  <meta name="twitter:description" content="How Stackset builds and operates software: integration service endpoints instead of exposed databases, SSO everywhere, containerised services, row-level security and responsible disclosure." />
+  <meta name="twitter:image" content="https://stackset.io/assets/og.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preload" href="/assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Stackset Technologies Inc.","url":"https://stackset.io","logo":"https://stackset.io/assets/og.png","foundingLocation":"Markham, Ontario, Canada","founders":[{"@type":"Person","name":"Kevin Chan"},{"@type":"Person","name":"Brian Ren"}],"sameAs":["https://shelfie-app.ca"],"contactPoint":{"@type":"ContactPoint","email":"support@stackset.io","contactType":"customer support"}}</script>
+</head>
+<body>
+<div class="curtain" aria-hidden="true"><div class="cur-brand"><span class="mark" style="width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#22d3ee,#818cf8 55%,#e879f9);display:grid;place-items:center;color:#05060c;font-weight:800;font-size:.95rem">S</span>stackset</div></div>
+<div class="progress" aria-hidden="true"></div>
+<a class="sr-only" href="#main">Skip to content</a>
+
+<header id="site-nav" class="nav">
+  <div class="container">
+    <a class="brand" href="/" aria-label="Stackset home"><span class="mark">S</span>stackset</a>
+    <nav class="nav-links" aria-label="Primary"><a href="/">Home</a><a href="/products/">Products</a><a href="/security/">Security</a><a href="/about/">About</a><a href="/support/">Support</a></nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="https://shelfie-app.ca" target="_blank" rel="noopener">Shelfie app</a>
+      <a class="btn btn-primary" href="/support/#contact">Talk to us <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <button id="menu-btn" class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+<div id="mobile-menu" class="mobile-menu"><a href="/">Home</a><a href="/products/">Products</a><a href="/security/">Security</a><a href="/about/">About</a><a href="/support/">Support</a><a class="btn btn-primary" href="/support/#contact">Talk to us</a></div>
+<main id="main">
+<section class="page-hero">
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="orbs" aria-hidden="true"><span class="orb orb-2" data-orb></span><span class="orb orb-3" data-orb></span></div>
+  <div class="container" style="position:relative;z-index:2">
+    <p class="eyebrow" data-hero="eyebrow">Security &amp; infrastructure</p>
+    <h1 id="hero-title" class="h1" data-hero="title">Secure by <span class="gradient-text">architecture,</span> not by hope.</h1>
+    <p class="lead" data-hero="sub">This page describes how Stackset products are built and operated. It is written for the technically curious user, for brand partners doing due diligence, and for investors who want to know we take custody of personal data seriously.</p>
+    <div class="hero-meta" data-hero="meta">
+      <div><strong>0</strong>public database endpoints</div>
+      <div><strong>100%</strong>of internal consoles behind SSO + MFA</div>
+      <div><strong>&lt;60s</strong>rollback to any snapshot</div>
+    </div>
+  </div>
+</section>
+
+
+<section id="security" class="section sec-wrap">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow" data-reveal>Core security infrastructure</p>
+      <h2 class="h2" data-split>Built so the database is <span class="gradient-text">never on the internet.</span></h2>
+      <p class="lead mt-3" data-reveal>Every Stackset product ships on the same hardened platform. Clients never hold a database connection string. They talk to a narrow integration layer that authenticates, authorises and shapes every request before anything touches storage.</p>
+    </div>
+    <div class="sec-grid">
+      <div class="sec-sticky" data-reveal="left">
+        <div class="arch" aria-label="Diagram: client apps reach data only through the integration gateway">
+          <span class="packet"></span><span class="packet"></span><span class="packet"></span>
+          <div class="zone"><span>Untrusted</span>
+            <div class="lane">
+              <div class="box client">iOS / Android / Web clients <small>short-lived tokens only</small></div>
+              <div class="box blocked">direct DB connection <small>no route · refused</small></div>
+            </div>
+          </div>
+          <div class="flow"><i></i> TLS 1.3 · JWT · rate limits <i></i></div>
+          <div class="zone"><span>Edge</span>
+            <div class="lane">
+              <div class="box gw">Integration service endpoints <small>auth · validation · policy</small></div>
+            </div>
+          </div>
+          <div class="flow"><i></i> mTLS inside the private network <i></i></div>
+          <div class="zone"><span>Private network</span>
+            <div class="lane">
+              <div class="box svc">Containerised services <small>one job each · least privilege</small></div>
+              <div class="box svc">Media &amp; extraction workers <small>sandboxed · egress-filtered</small></div>
+              <div class="box db">Postgres + object storage <small>row-level security · encrypted at rest</small></div>
+            </div>
+          </div>
+          <div class="flow"><i></i> SSO (OIDC) for every internal console · audit-logged <i></i></div>
+        </div>
+      </div>
+      <div class="sec-list" data-stagger>
+        <div class="sec-item"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></svg></div><div><h3>Integration service endpoints</h3><p>Apps call purpose-built endpoints, not tables. Each endpoint validates input, checks the caller's identity and policy, and returns only the fields that screen needs. Internal database hosts have no public route, so a leaked client build or a malicious agent probing our edge finds nothing to connect to.</p></div></div>
+        <div class="sec-item"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.9 12.1L21 2m-4 4l3 3m-6 0l3 3"/></svg></div><div><h3>Single sign-on everywhere</h3><p>Every internal console, dashboard and admin tool sits behind SSO with OpenID Connect and enforced multi-factor authentication. Access is role-based and reviewed; leaving the team revokes everything in one place. End users get the same care: Sign in with Apple, Google, or a one-time email code. We never see or store passwords in plain text.</p></div></div>
+        <div class="sec-item"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div><div><h3>Containerised applications</h3><p>Each service runs in its own container with a read-only filesystem, a non-root user, pinned dependencies and an explicit egress allow-list. Workers that touch untrusted content, such as link extraction and media transcoding, are isolated from anything holding user data.</p></div></div>
+        <div class="sec-item"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div><div><h3>Row-level security as the last line</h3><p>Even behind the gateway, the database enforces per-row policies tied to the authenticated user. A bug in one endpoint cannot read another person's private collection, message or profile.</p></div></div>
+        <div class="sec-item"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><div><h3>Secrets that never sit still</h3><p>Credentials are minted at deploy time, scoped to one service, rotated automatically and injected at runtime. Nothing sensitive lives in a repository, a build artefact or a developer laptop.</p></div></div>
+        <div class="sec-item"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><div><h3>Encryption and auditability</h3><p>TLS 1.3 in transit, AES-256 at rest, signed and immutable deploy snapshots, and structured audit logs for every privileged action. If something looks wrong we can see exactly who did what, and roll back in under a minute.</p></div></div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section" id="principles">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow" data-reveal>Operating principles</p>
+      <h2 class="h2" data-split>Seven rules we don't <span class="gradient-text">negotiate.</span></h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card" data-card><span class="spot"></span><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></svg></div><h3>No client ever holds a database credential</h3><p>Mobile and web builds contain only a public, anonymous key that unlocks nothing without a user session. Writes and sensitive reads go through integration endpoints.</p></div>
+      <div class="card" data-card><span class="spot"></span><div class="icon violet"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.9 12.1L21 2m-4 4l3 3m-6 0l3 3"/></svg></div><h3>SSO or nothing for internal access</h3><p>Dashboards, cloud consoles, the app stores and source control sit behind SSO (OIDC) with hardware-key or app-based MFA. No shared passwords, ever.</p></div>
+      <div class="card" data-card><span class="spot"></span><div class="icon mint"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div><h3>One container, one job</h3><p>Services are small, run as non-root with read-only filesystems, and can only reach the hosts on their allow-list. Compromising one does not grant the next.</p></div>
+      <div class="card" data-card><span class="spot"></span><div class="icon magenta"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div><h3>Least privilege, enforced in the database</h3><p>Row-level security policies bind every row to its owner. Service accounts for background workers have exactly the grants their job needs and nothing more.</p></div>
+      <div class="card" data-card><span class="spot"></span><div class="icon amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Secrets are minted, not copied</h3><p>Short-lived, scoped credentials are issued at deploy time and rotated automatically. Repositories, build logs and laptops never contain production secrets.</p></div>
+      <div class="card" data-card><span class="spot"></span><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Everything is a snapshot</h3><p>Every release is immutable and signed. Over-the-air updates are fingerprinted against the native binary they target. Any environment can be rolled back in under a minute.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="data">
+  <div class="container">
+    <div class="sec-grid">
+      <div>
+        <p class="eyebrow" data-reveal>User data</p>
+        <h2 class="h2 mt-2" data-split>What we store and <span class="gradient-text">how we protect it.</span></h2>
+        <p class="lead mt-3" data-reveal>Shelfie holds the data you'd expect from a social app: your profile, collections, posts, messages and a beauty profile you choose to fill in. Here's how each category is handled.</p>
+      </div>
+      <div class="sec-list" data-stagger>
+        <div class="sec-item"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 20a5 5 0 016-4.6"/></svg></div><div><h3>Identity</h3><p>Email and password sign-in uses one-time codes, never a stored plaintext password. Sign in with Apple and Google hand us a verified identity token and nothing else.</p></div></div>
+        <div class="sec-item"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/></svg></div><div><h3>Messages &amp; private content</h3><p>Direct messages, private collections and followers-only posts are readable only by their participants, enforced by database policy and checked again at the endpoint.</p></div></div>
+        <div class="sec-item"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><div><h3>Media</h3><p>Uploads are stripped of location metadata, transcoded in an isolated worker, and stored in per-user folders in object storage with scoped, expiring access.</p></div></div>
+        <div class="sec-item"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg></div><div><h3>Residency &amp; retention</h3><p>Production data is hosted in North America. You can request deletion from inside the app; we honour it across backups within 30 days.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="disclosure">
+  <div class="container">
+    <div class="cta-band" data-reveal="scale">
+      <p class="eyebrow">Responsible disclosure</p>
+      <h2 class="h2 mt-2">Found something? Tell us first.</h2>
+      <p class="lead mt-3" style="max-width:44rem">We welcome good-faith security research on our products. Email <a href="mailto:security@stackset.io" style="color:var(--cyan)">security@stackset.io</a> with steps to reproduce. We acknowledge within 2 business days, keep you updated, and credit researchers who want it. Please don't access other people's data, degrade the service, or publish before we've fixed the issue. A machine-readable version lives at <a href="/.well-known/security.txt" class="mono" style="color:var(--cyan)">/.well-known/security.txt</a>.</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/"><span class="mark">S</span>stackset</a>
+        <p class="tag">Stackset Technologies is a Canadian software company. We design, build and operate consumer apps and the secure infrastructure behind them.</p>
+        <p class="tag mono" style="font-size:.78rem;color:var(--muted)">Markham, Ontario · founded by Kevin Chan &amp; Brian Ren</p>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="https://shelfie-app.ca" target="_blank" rel="noopener">Shelfie</a></li>
+          <li><a href="/products/#clipforge">Clipforge</a></li>
+          <li><a href="/products/#relayform">Relayform</a></li>
+          <li><a href="/products/#pantryloop">Pantryloop</a></li>
+          <li><a href="/products/">All products</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/security/">Security</a></li>
+          <li><a href="/support/">Support</a></li>
+          <li><a href="/support/#contact">Contact</a></li>
+          <li><a href="/support/#investors">Investors</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/terms/">Terms of service</a></li>
+          <li><a href="/security/#disclosure">Responsible disclosure</a></li>
+          <li><a href="/.well-known/security.txt">security.txt</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Stackset Technologies Inc. · Markham, ON, Canada</span>
+      <span class="status-row"><span class="dot"></span>all systems nominal</span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/gsap.min.js" defer></script>
+<script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="/assets/vendor/lenis.min.js" defer></script>
+<script src="/assets/vendor/split-type.min.js" defer></script>
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>
